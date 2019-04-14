@@ -3,46 +3,20 @@ package primitives;
 import java.util.Objects;
 
 public class Ray {
-    Vector head;
-  Point3D  tail;
+    private Point3D head;
+    private Vector direction;
 
-    public Ray(){
-        this.head = new Vector();
-        this.tail = new Point3D();
+    public Ray() {
     }
 
-    public Ray(Vector head, Point3D teal) {
+    public Ray(Point3D head, Vector direction) {
         this.setHead(head);
-        this.setTail(teal);
-    }
-    public Ray(Ray r){
-        this.setTail(r.getTail());
-        this.setHead(r.getHead());
-    }
-    /************** Getters/Setters *******/
-
-    public Vector getHead() {
-        return new Vector(this.head);
+        this.setDirection(direction);
     }
 
-    public void setHead(Vector head) {
-        this.head = new Vector(head);
-    }
-
-    public Point3D getTail() {
-        return new Point3D(this.tail);
-    }
-
-    public void setTail(Point3D tail) {
-        this.tail = new Point3D(tail);
-    }
-
-    @Override
-    public String toString() {
-        return "Ray{" +
-                "head=" + head +
-                ", tail=" + tail +
-                '}';
+    public Ray(Ray other) {
+        setHead(other.head);
+        setDirection(other.direction);
     }
 
     @Override
@@ -50,12 +24,37 @@ public class Ray {
         if (this == o) return true;
         if (!(o instanceof Ray)) return false;
         Ray ray = (Ray) o;
-        return Objects.equals(getHead(), ray.getHead()) &&
-                Objects.equals(getTail(), ray.getTail());
+        return getHead().equals(ray.getHead()) &&
+                getDirection().equals(ray.getDirection());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getHead(), getTail());
+        return Objects.hash(getHead(), getDirection());
+    }
+
+    @Override
+    public String toString() {
+        return "Ray{" +
+                "head=" + getHead() +
+                ", direction=" + getDirection() +
+                '}';
+    }
+
+
+    public Point3D getHead() {
+        return new Point3D(head);
+    }
+
+    public void setHead(Point3D head) {
+        this.head = new Point3D(head);
+    }
+
+    public Vector getDirection() {
+        return new Vector(direction);
+    }
+
+    public void setDirection(Vector direction) {
+        this.direction = new Vector(direction);
     }
 }

@@ -79,7 +79,7 @@ public class Triangle extends Plane {
 
     public Vector getNormal(Point3D p) {
         Vector v1 = new Vector(a, b);
-        Vector v2 = new Vector(a, c);
+        Vector v2 = new Vector(c, b);
         Vector v = v2.crossProduct(v1);
         v.normalize();
         v.scale(-1);

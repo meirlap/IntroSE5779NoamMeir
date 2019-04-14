@@ -1,9 +1,11 @@
 package primitives;
+
 import java.util.Objects;
+
 import static java.lang.StrictMath.*;
 
 public class Point3D extends Point2D {
-    public static final Point3D POINT_ZERO =  new Point3D();
+    public static final Point3D POINT_ZERO = new Point3D();
 
     private Coordinate _z;
 
@@ -11,28 +13,30 @@ public class Point3D extends Point2D {
     public Point3D() {
         this.set_z(Coordinate.ZERO);
     }
+
     public Point3D(Point3D other) {
         this.set_x(other.get_x());
         this.set_y(other.get_y());
         this.set_z(other.get_z());
     }
+
     public Point3D(Coordinate x, Coordinate y, Coordinate z) {
         super(x, y);
         this.set_z(z);
     }
 
     public Point3D(double x, double y, double z) {
-        super(x,y);
+        super(x, y);
         set_z(new Coordinate(z));
     }
 
     /************** Getters/Setters *******/
     public Coordinate get_z() {
-        return  new Coordinate(_z);
+        return new Coordinate(_z);
     }
 
     public void set_z(Coordinate z) {
-        this._z =  new Coordinate(z);
+        this._z = new Coordinate(z);
     }
 
     /************** Administration *******/
@@ -45,31 +49,29 @@ public class Point3D extends Point2D {
         Point3D point3D = (Point3D) obj;
         return get_z().equals(point3D.get_z());
     }
-    public double length(Point3D p){
-        return sqrt( pow(this.get_x().get() - p.get_x().get(),2) +
-                pow(this.get_y().get() - p.get_y().get(),2)+
-                pow(this.get_z().get() - p.get_z().get(),2));
+
+    public double length(Point3D p) {
+        return sqrt(pow(this.get_x().get() - p.get_x().get(), 2) +
+                pow(this.get_y().get() - p.get_y().get(), 2) +
+                pow(this.get_z().get() - p.get_z().get(), 2));
     }
-    public void addVector(Vector v)
-    {
+
+    public Point3D addVector(Vector v) {
         Point3D result = new Point3D(
                 this.get_x().add(v.getHead().get_x()),
                 this.get_y().add(v.getHead().get_y()),
                 this.get_z().add(v.getHead().get_z()));
-        this.set_x(result.get_x());
-        this.set_y(result.get_y());
-        this.set_z(result.get_z());
+        return result;
     }
-    public void subVector(Vector v)
-    {
+
+    public Point3D subVector(Vector v) {
         Point3D result = new Point3D(
                 this.get_x().subtract(v.getHead().get_x()),
                 this.get_y().subtract(v.getHead().get_y()),
                 this.get_z().subtract(v.getHead().get_z()));
-        this.set_x(result.get_x());
-        this.set_y(result.get_y());
-        this.set_z(result.get_z());
+        return result;
     }
+
     @Override
     public String toString() {
         return "Point3D{" +
@@ -78,11 +80,11 @@ public class Point3D extends Point2D {
                 ", z=" + get_z() +
                 '}';
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), get_z());
     }
-
 
 
 }

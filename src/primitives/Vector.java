@@ -36,6 +36,10 @@ public class Vector {
                 b.get_z().subtract(a.get_z())));
     }
 
+    public Vector(double x, double y, double z) {
+        setHead(new Point3D( x,y, z));
+    }
+
     /************** Getters/Setters *******/
     public Point3D getHead() {
         return new Point3D(head);
